@@ -50,7 +50,7 @@
                 })
         }
 
-        function sortData() {
+        function sortDataDown() {
             UTdata.order(key, true).fetchAll()
                 .then(function(results) {
                     let msg = "";
@@ -152,7 +152,7 @@
     </div>
     <div>
         <a onclick="fetchAll()" class="btn btn-outline-secondary" role="buton">Fetch All</a>
-        <a onclick="sortData()" class="btn btn-outline-secondary" role="button">Sort</a>
+        <a onclick="sortDataDown()" class="btn btn-outline-secondary" role="button">Sort Down</a>
         <a onclick="sortDataUP()" class="btn btn-outline-secondary" role="button">Sort UP</a>
         <a onclick="countData()" class="btn btn-outline-secondary" role="button">Count</a>
         <a onclick="deleteData()" class="btn btn-outline-secondary" role="buton">Delete</a>
