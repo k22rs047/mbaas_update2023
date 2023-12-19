@@ -67,6 +67,25 @@
                     $("#display").addClass("bg-warning");
                     $("#display").html("delete fail:" + JSON.stringify(error));
                 })
+        }
+
+        function sortDataUP() {
+            UTdata.order(key, false).fetchAll()
+                .then(function(results) {
+                    let msg = "";
+                    for (let i = 0; i < results.length; i++) {
+                        msg += results[i].get(key) + "<br>";
+                    }
+                    $("#display").removeClass();
+                    $("#display").addClass("text-light");
+                    $("#display").addClass("bg-primary");
+                    $("#display").html(msg);
+                })
+                .catch(function(error) {
+                    $("#display").removeClass();
+                    $("#display").addClass("bg-warning");
+                    $("#display").html("delete fail:" + JSON.stringify(error));
+                })
 
 
         }
@@ -134,6 +153,7 @@
     <div>
         <a onclick="fetchAll()" class="btn btn-outline-secondary" role="buton">Fetch All</a>
         <a onclick="sortData()" class="btn btn-outline-secondary" role="button">Sort</a>
+        <a onclick="sortDataUP()" class="btn btn-outline-secondary" role="button">Sort UP</a>
         <a onclick="countData()" class="btn btn-outline-secondary" role="button">Count</a>
         <a onclick="deleteData()" class="btn btn-outline-secondary" role="buton">Delete</a>
     </div>
