@@ -50,6 +50,29 @@
                 })
         }
 
+       
+
+        function dataClear() {
+             UTdata.fetchAll()
+                .then(function(results) {
+                    let cr = "";
+                    for (let i = 0; i < results.length; i++) {
+                        cr += results[i].delete();
+                    }
+                })
+                .then(function(results) {
+                    $("#display").removeClass();
+                    $("#display").addClass("bg-success");
+                    $("#display").html("clear success");
+                })
+                .catch(function(error) {
+                    $("#display").removeClass();
+                    $("#display").addClass("bg-warning");
+                    $("#display").html("clear fail:" + JSON.stringify(error));
+                })
+            
+        }
+
         function sortDataDown() {
             UTdata.order(key, true).fetchAll()
                 .then(function(results) {
@@ -89,21 +112,7 @@
 
         }
 
-        function DataLT() {
-            UTdata.equalTo(msg).fetchAll()
-                .then(function(results) {
-                    let msg = parseInt($("#datalt").val());
 
-                    $("#display").removeClass();
-                    $("#display").addClass("bg-success");
-                    $("#display").html(results.equalTo(msg));
-                })
-                .catch(function(error) {
-                    $("#display").removeClass();
-                    $("#display").addClass("bg-warning");
-                    $("#display").html("update fail:" + JSON.stringify(error));
-                })
-        }
 
         function countData() {
             UTdata.count().fetchAll()
@@ -161,27 +170,28 @@
 
 <body style="background-color:rgb(248,248,255);">
     <p style="color:white;">
-    <h1 class="text-light bg-info">mbaas update</h1>
-    <div>
-        <input type="text" id="data" placeholder="スコア">
-        <a onclick="enterData()" class="btn btn-outline-secondary" role="button">Enter</a>
-        <input id="datalt" type="number" placeholder="サーチ">
-        <a onclick="DataLT()" class="btn btn-outline-secondary" role="button">data</a>
-    </div>
-    <div>
-        <a onclick="fetchAll()" class="btn btn-outline-secondary" role="buton">Fetch All</a>
-        <a onclick="sortDataDown()" class="btn btn-outline-secondary" role="button">Sort Down</a>
-        <a onclick="sortDataUP()" class="btn btn-outline-secondary" role="button">Sort UP</a>
-        <a onclick="countData()" class="btn btn-outline-secondary" role="button">Count</a>
-        <a onclick="deleteData()" class="btn btn-outline-secondary" role="buton">Delete</a>
-    </div>
-    <div>
-        <input type="text" id="update" placeholder="更新">
-        <a onclick="updateData()" class="btn btn-outline-secondary" role="button">Update</a>
-    </div>
-    <div id="display" class="text-light bg-info">
-        Results
-    </div>
+        <h1 class="text-light bg-info">mbaas update</h1>
+        <div>
+            <input type="text" id="data" placeholder="スコア">
+            <a onclick="enterData()" class="btn btn-outline-secondary" role="button">Enter</a>
+            <input type="number" id="score" placeholder="スコア">
+            <a onclick="searchScore()" class="btn btn-outline-secondary" role="button">Search</a>
+        </div>
+        <div>
+            <a onclick="fetchAll()" class="btn btn-outline-secondary" role="buton">Fetch All</a>
+            <a onclick="sortDataDown()" class="btn btn-outline-secondary" role="button">Sort Down</a>
+            <a onclick="sortDataUP()" class="btn btn-outline-secondary" role="button">Sort UP</a>
+            <a onclick="dataClear()" class="btn btn-outline-secondary" role="buton">Clear</a>
+            <a onclick="countData()" class="btn btn-outline-secondary" role="button">Count</a>
+            <a onclick="deleteData()" class="btn btn-outline-secondary" role="buton">Delete</a>
+        </div>
+        <div>
+            <input type="text" id="update" placeholder="更新">
+            <a onclick="updateData()" class="btn btn-outline-secondary" role="button">Update</a>
+        </div>
+        <div id="display" class="text-light bg-info">
+            Results
+        </div>
 </body>
 
 </html>
