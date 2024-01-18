@@ -50,7 +50,26 @@
                 })
         }
 
-       
+        function displayScore() {
+            let score = parseInt($("#score").val());
+            UTdata
+                .equalTo(key, score)
+                .fetchAll()
+                .then(function(results) {
+                    $("#display").removeClass();
+                    $("#display").addClass("text-light");
+                    $("#display").addClass("bg-primary");
+                    $("#display").html(score);
+                })
+                .catch(function(error) {
+                    $("#display").removeClass();
+                    $("#display").addClass("bg-warning");
+                    $("#display").html("search fail:" + JSON.stringify(error));
+                })
+        }
+
+        
+
 
         function dataClear() {
              UTdata.fetchAll()
@@ -112,8 +131,7 @@
 
         }
 
-
-
+-p
         function countData() {
             UTdata.count().fetchAll()
                 .then(function(results) {
@@ -174,8 +192,8 @@
         <div>
             <input type="text" id="data" placeholder="スコア">
             <a onclick="enterData()" class="btn btn-outline-secondary" role="button">Enter</a>
-            <input type="number" id="score" placeholder="スコア">
-            <a onclick="searchScore()" class="btn btn-outline-secondary" role="button">Search</a>
+            <input type="number" id="score" placeholder="ディスプレイスコア">
+            <a onclick="displayScore()" class="btn btn-outline-secondary" role="button">Display</a>
         </div>
         <div>
             <a onclick="fetchAll()" class="btn btn-outline-secondary" role="buton">Fetch All</a>
